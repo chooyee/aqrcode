@@ -6,7 +6,7 @@ var QRCode = require('qrcode')
 
 const qrHelper = require("./controllers/qr.controller");
 
-
+require('dotenv').config();
 
 app.use(cors());
 app.set('trust proxy', 1) // trust first proxy
@@ -31,7 +31,7 @@ app.get("/qr/:uri", (req, res)=>{
 
 app.post("/qr/logo", qrHelper.QrWithLogo);
 
-require('dotenv').config();
+
 // set port, listen for requests
 const PORT = process.env.PORT || 9999;
 app.listen(PORT, () => {
