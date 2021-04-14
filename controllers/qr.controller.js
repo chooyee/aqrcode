@@ -1,30 +1,23 @@
+const e = require("express");
 const QRCode = require("qrcode");
-const { createCanvas, loadImage } = require("canvas");
 
-exports.QrWithLogo=async (req,res)=>{
-    const {data,logo} = req.body;
-    
+
+exports.GenerateQR = async(req, res)=>{
+    var data = "";
+    if (req.query.data!==undefined){
+        data = req.query.data;
+    }
+    else{
+        data = req.body.data
+    }   
+    console.log(req.body);
+
+    try{
+        const uri = await QRCode.toDataURL(data);
+        res.status(200).send(uri);    
+    }
+    catch(e){
+        res.status(500).send(e);   
+    } 
 };
 
-async function GenQrWithLogo(dataForQRcode, center_image, width, cwidth) {
-    const canvas = createCanvas(width, width);
-    QRCode.toCanvas(
-      canvas,
-      dataForQRcode,
-      {
-        errorCorrectionLevel: "H",
-        margin: 1,
-        color: {
-          dark: "#000000",
-          light: "#ffffff",
-        },
-      }
-    );
-  
-    const ctx = canvas.getContext("2d");
-    const img = await loadImage(center_image);
-    const center = (width - cwidth) / 2;
-    ctx.drawImage(img, center, center, cwidth, cwidth);
-    return canvas.toDataURL("image/png");
-  }
-  

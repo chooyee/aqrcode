@@ -4,16 +4,16 @@ const cors = require("cors");
 const app = express();
 var QRCode = require('qrcode')
 
-const qrHelper = require("./controllers/qr.controller");
+const qr = require("./controllers/qr.controller");
 
 require('dotenv').config();
 
 app.use(cors());
 app.set('trust proxy', 1) // trust first proxy
-//app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/test", (req, res) => {
+app.get("/test", async (req, res) => {
     QRCode.toDataURL('https://www.google.com', function (err, url) {
         res.status(200).send('<img src="' + url+ '">');    
     })
@@ -24,26 +24,9 @@ app.get("/ping", (req, res) => {
 });
 
 
-app.get("/qr", (req, res)=>{
-    console.log(req.query.data);
-    QRCode.toDataURL(req.query.data, function (err, url) {
-        if (!err)
-            res.status(200).send(url);    
-        else
-            res.status(500).send(err);   
-    })
-});
+app.get("/qr", qr.GenerateQR);
 
-app.post("/qr", (req, res)=>{    
-    const data = req.body.data;
-    QRCode.toDataURL(data, function (err, url) {
-        if (!err)
-            res.status(200).send(url);    
-        else
-            res.status(500).send(err);   
-    })
-});
-
+app.post("/qr", qr.GenerateQR);
 
 // app.post("/qr/logo", qrHelper.QrWithLogo);
 
