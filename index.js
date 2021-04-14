@@ -6,6 +6,8 @@ var QRCode = require('qrcode')
 
 const qrHelper = require("./controllers/qr.controller");
 
+
+
 app.use(cors());
 app.set('trust proxy', 1) // trust first proxy
 app.use(express.json());
@@ -29,9 +31,9 @@ app.get("/qr/:uri", (req, res)=>{
 
 app.post("/qr/logo", qrHelper.QrWithLogo);
 
-
+require('dotenv').config();
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 9999;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
