@@ -23,27 +23,29 @@ app.get("/ping", (req, res) => {
     res.status(200).send('pong');    
 });
 
-app.get("/qr/:uri", (req, res)=>{
-    QRCode.toDataURL(req.params.uri, function (err, url) {
-        res.status(200).send(url);    
-    })
-});
 
 app.get("/qr", (req, res)=>{
     console.log(req.query.data);
     QRCode.toDataURL(req.query.data, function (err, url) {
-        res.status(200).send(url);    
+        if (!err)
+            res.status(200).send(url);    
+        else
+            res.status(500).send(err);   
     })
 });
 
-app.post("/qr", (req, res)=>{
-    console.log(req.body.data);
-    QRCode.toDataURL(req.body.data, function (err, url) {
-        res.status(200).send(url);    
+app.post("/qr", (req, res)=>{    
+    const data = req.body.data;
+    QRCode.toDataURL(data, function (err, url) {
+        if (!err)
+            res.status(200).send(url);    
+        else
+            res.status(500).send(err);   
     })
 });
 
-app.post("/qr/logo", qrHelper.QrWithLogo);
+
+// app.post("/qr/logo", qrHelper.QrWithLogo);
 
 
 // set port, listen for requests
