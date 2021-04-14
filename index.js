@@ -10,8 +10,8 @@ require('dotenv').config();
 
 app.use(cors());
 app.set('trust proxy', 1) // trust first proxy
-app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+//app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/test", (req, res) => {
     QRCode.toDataURL('https://www.google.com', function (err, url) {
@@ -25,6 +25,20 @@ app.get("/ping", (req, res) => {
 
 app.get("/qr/:uri", (req, res)=>{
     QRCode.toDataURL(req.params.uri, function (err, url) {
+        res.status(200).send(url);    
+    })
+});
+
+app.get("/qr", (req, res)=>{
+    console.log(req.query.data);
+    QRCode.toDataURL(req.query.data, function (err, url) {
+        res.status(200).send(url);    
+    })
+});
+
+app.post("/qr", (req, res)=>{
+    console.log(req.body.data);
+    QRCode.toDataURL(req.body.data, function (err, url) {
         res.status(200).send(url);    
     })
 });
