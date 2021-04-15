@@ -2,8 +2,6 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-var QRCode = require('qrcode')
-
 const qr = require("./controllers/qr.controller");
 
 require('dotenv').config();
@@ -14,9 +12,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/test", async (req, res) => {
-    QRCode.toDataURL('https://www.google.com', function (err, url) {
-        res.status(200).send('<img src="' + url+ '">');    
-    })
+    // QRCode.toDataURL('https://www.google.com', function (err, url) {
+    //     res.status(200).send('<img src="' + url+ '">');    
+    // })
+    const data = 'https://www.google.com';
+    var options = {
+        text: data,
+        width:150,
+        height:150,
+        // logo:"https://pbs.twimg.com/profile_images/813541500671836160/VZ3p31NW_200x200.jpg",
+        // backgroundImage:"https://pbs.twimg.com/profile_images/813541500671836160/VZ3p31NW_200x200.jpg",
+        // autoColor:true,
+        colorDark : "#000000",
+		colorLight : "#ffffff",
+    };
+    var keys = Object.keys(options);
+    for( var i = 0,length = keys.length; i < length; i++ ) {
+        console.log(keys[i] + ":" +options[keys[i]]);
+
+    }
+    try{
+        const datauri = await qr.GenerateQRRaw(options);
+        //console.log(datauri);
+        res.status(200).send('<img src="' + datauri+ '">');    
+    }
+    catch(e){
+        res.status(500).send(e.message);    
+    }
 });
 // simple route
 app.get("/ping", (req, res) => {
