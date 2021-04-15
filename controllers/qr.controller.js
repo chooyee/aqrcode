@@ -32,9 +32,11 @@ exports.GenerateQR = async(req, res)=>{
     }
     if (jsonObj.hasOwnProperty('colorDark')){
         options.colorDark = jsonObj.colorDark;
+        options.autoColor=false;
     }
     if (jsonObj.hasOwnProperty('colorLight')){
         options.colorLight = jsonObj.colorLight;
+        options.autoColor=false;
     }
 
     
