@@ -5,8 +5,7 @@ const QRCode = require('easyqrcodejs-nodejs');
 exports.GenerateQR = async(req, res)=>{
     var data = "";
     var options = {
-        text: data,       
-        autoColor:true
+        text: data
     };
 
     if (req.query.data!==undefined){
@@ -29,14 +28,19 @@ exports.GenerateQR = async(req, res)=>{
     }
     if (jsonObj.hasOwnProperty('backgroundImage')){
         options.backgroundImage = jsonObj.backgroundImage;
+        options.autoColor=true;
     }
     if (jsonObj.hasOwnProperty('colorDark')){
+        console.log(jsonObj.colorDark);
+        if (!jsonObj.colorDark.startsWith('#'))
+            jsonObj.colorDark ='#' + jsonObj.colorDark;
+        
         options.colorDark = jsonObj.colorDark;
-        options.autoColor=false;
     }
     if (jsonObj.hasOwnProperty('colorLight')){
+        if (!jsonObj.colorLight.startsWith('#'))
+            jsonObj.colorLight ='#' + jsonObj.colorLight;        
         options.colorLight = jsonObj.colorLight;
-        options.autoColor=false;
     }
 
     

@@ -24,7 +24,7 @@ app.get("/test", async (req, res) => {
         // backgroundImage:"https://pbs.twimg.com/profile_images/813541500671836160/VZ3p31NW_200x200.jpg",
         // autoColor:true,
         colorDark : "#9c23ba",
-		colorLight : "#5d9dcb",
+		
     };
     var keys = Object.keys(options);
     for( var i = 0,length = keys.length; i < length; i++ ) {
