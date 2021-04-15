@@ -4,37 +4,40 @@ const QRCode = require('easyqrcodejs-nodejs');
 
 exports.GenerateQR = async(req, res)=>{
     var data = "";
-
-    if (req.query.data!==undefined){
-        data = req.query.data;
-    }
-    else{
-        data = req.body.data
-    }   
-
     var options = {
         text: data,       
         autoColor:true
     };
 
-    if (req.body.hasOwnProperty('logo')){
-        options.logo = req.body.logo;
+    if (req.query.data!==undefined){
+        options.text = req.query.data;
+        jsonObj = req.query;
     }
-    if (req.body.hasOwnProperty('width')){
-        options.width = req.body.width;
+    else{
+        options.text = req.body.data;
+        jsonObj = req.body;
+    }   
+
+    if (jsonObj.hasOwnProperty('logo')){
+        options.logo = jsonObj.logo;
     }
-    if (req.body.hasOwnProperty('height')){
-        options.height = req.body.height;
+    if (jsonObj.hasOwnProperty('width')){
+        options.width = parseInt(jsonObj.width);
     }
-    if (req.body.hasOwnProperty('backgroundImage')){
-        options.backgroundImage = req.body.backgroundImage;
+    if (jsonObj.hasOwnProperty('height')){
+        options.height = parseInt(jsonObj.height);
     }
-    if (req.body.hasOwnProperty('colorDark')){
-        options.colorDark = req.body.colorDark;
+    if (jsonObj.hasOwnProperty('backgroundImage')){
+        options.backgroundImage = jsonObj.backgroundImage;
     }
-    if (req.body.hasOwnProperty('colorLight')){
-        options.colorLight = req.body.colorLight;
+    if (jsonObj.hasOwnProperty('colorDark')){
+        options.colorDark = jsonObj.colorDark;
     }
+    if (jsonObj.hasOwnProperty('colorLight')){
+        options.colorLight = jsonObj.colorLight;
+    }
+
+    
     console.log(options);
 
     try{
