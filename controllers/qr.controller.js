@@ -1,8 +1,27 @@
 
 // const QRCode = require("qrcode");
 const QRCode = require('easyqrcodejs-nodejs');
+const CacheService = require('../service/cache.service');
+const ttl = 60 * 60 * 24; // cache for 1 Hour
+const cache = new CacheService(ttl); // Create a new cache service insta
+const crypto = require('crypto');
 
 exports.GenerateQR = async(req, res)=>{
+
+    let optionStr = JSON.stringify(req.query); 
+    let qrId = crypto.createHash('md5').update(optionStr).digest("hex");
+
+    cache.get(qrId, async function(){return GenerateQRAsync(req)}).then((result)=>{
+        res.status(200).send(result);   
+    }).catch((e)=>{
+        console.log(e);
+        res.status(500).json({Error:e.message});   
+    });
+    
+}
+
+
+async function GenerateQRAsync(req){
     var data = "";
     var options = {
         text: data
@@ -45,16 +64,10 @@ exports.GenerateQR = async(req, res)=>{
 
     
     console.log(options);
-
-    try{
-        // const uri = await QRCode.toDataURL(data);
-        var qrcode = new QRCode(options);
-        const uri = await qrcode.toDataURL();
-        res.status(200).send(uri);    
-    }
-    catch(e){
-        res.status(500).send(e);   
-    } 
+   
+    // const uri = await QRCode.toDataURL(data);
+    var qrcode = new QRCode(options);
+    return qrcode.toDataURL();
 }
 
 exports.GenerateQRRaw = async (data)=>{
