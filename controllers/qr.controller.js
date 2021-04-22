@@ -11,8 +11,15 @@ exports.GenerateQR = async(req, res)=>{
     let optionStr = JSON.stringify(req.query); 
     let qrId = crypto.createHash('md5').update(optionStr).digest("hex");
 
-    cache.get(qrId, async function(){return GenerateQRAsync(req)}).then((result)=>{
-        res.status(200).send(result);   
+    cache.get(qrId, async function(){return GenerateQRAsync(req,qrId)}).then((result)=>{    
+        const im = result.split(",")[1];
+        const img = Buffer.from(im, 'base64');
+        res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': img.length
+        });
+        res.end(img);     
+       
     }).catch((e)=>{
         console.log(e);
         res.status(500).json({Error:e.message});   
@@ -21,7 +28,7 @@ exports.GenerateQR = async(req, res)=>{
 }
 
 
-async function GenerateQRAsync(req){
+async function GenerateQRAsync(req, qrId){
     var data = "";
     var options = {
         text: data
@@ -68,6 +75,15 @@ async function GenerateQRAsync(req){
     // const uri = await QRCode.toDataURL(data);
     var qrcode = new QRCode(options);
     return qrcode.toDataURL();
+    // let path = './public/assets/img/qrcode/' + qrId + '.png';
+    // qrcode.saveImage({
+    //     path: path
+    // });
+
+    // const proxyHost = req.headers["x-forwarded-host"];
+    // const host = proxyHost ? proxyHost : req.headers.host;
+
+    // return host + '/assets/img/qrcode/' + qrId + '.png';
 }
 
 exports.GenerateQRRaw = async (data)=>{

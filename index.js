@@ -1,10 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-
+const path = require('path');
 const app = express();
 const qr = require("./controllers/qr.controller");
 
 require('dotenv').config();
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static('./public'));
 
 app.use(cors());
 app.set('trust proxy', 1) // trust first proxy
@@ -45,12 +49,12 @@ app.get("/ping", (req, res) => {
     res.status(200).send('pong');    
 });
 
-
+app.get("/home", (req, res) => {
+    res.render('pages/home');
+});
 app.get("/qr", qr.GenerateQR);
 
 app.post("/qr", qr.GenerateQR);
-
-// app.post("/qr/logo", qrHelper.QrWithLogo);
 
 
 // set port, listen for requests
