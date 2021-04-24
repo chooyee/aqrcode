@@ -29,7 +29,7 @@ class Shorturi {
             headers: headers
         })
         .then(response => { 
-            //console.log(response);
+            console.log(response.data.data.tiny_url);
             return {status:Enum.Status.Success, url:response.data.data.tiny_url};
         })
         .catch(error => {

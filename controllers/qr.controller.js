@@ -56,11 +56,11 @@ async function GenerateQRAsync(req, qrId){
     }   
 
     //TinyUrl
-    const shortUrlRes = ShortUrl.Create(longUrl);
-    if (shortUrlRes.status==Enum.Status.Success){
+    const shortUrlRes = await ShortUrl.Create(longUrl);
+    if (shortUrlRes.status==Enum.Status.Success){       
         options.text = shortUrlRes.url;
     }
-    else{
+    else{        
         options.text = longUrl;
     }
 
