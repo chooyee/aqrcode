@@ -1,11 +1,13 @@
+const compression = require('compression')
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
 const app = express();
 const qr = require("./controllers/qr.controller");
-
-require('dotenv').config();
-
+const context = require('./service/context.service');
+const db = require("./models");
+db.sequelize.sync();
+app.use(compression())
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
@@ -19,16 +21,12 @@ app.get("/test", async (req, res) => {
     // QRCode.toDataURL('https://www.google.com', function (err, url) {
     //     res.status(200).send('<img src="' + url+ '">');    
     // })
-    const data = 'https://www.google.com';
+    var data = 'https://app.adjust.com/8o76e42?engagement_type=fallback_click%26fallback=https%3A%2F%2Fwww.alliancebank.com.my%2Fpromotions%2Fthebankinyourpocket.aspx%26fallback_lp=https%3A%2F%2Fwww.alliancebank.com.my%2Fpromotions%2Fthebankinyourpocket.aspx%26campaign=biyp%26adgroup=fb%26creative=null%26ecid=abcd';
+    data = decodeURIComponent(data);
+    console.log(data);
     var options = {
         text: data,
-        width:150,
-        height:150,
-        // logo:"https://pbs.twimg.com/profile_images/813541500671836160/VZ3p31NW_200x200.jpg",
-        // backgroundImage:"https://pbs.twimg.com/profile_images/813541500671836160/VZ3p31NW_200x200.jpg",
-        // autoColor:true,
-        colorDark : "#9c23ba",
-		
+        colorDark : "#9c23ba"
     };
     var keys = Object.keys(options);
     for( var i = 0,length = keys.length; i < length; i++ ) {
@@ -49,6 +47,12 @@ app.get("/ping", (req, res) => {
     res.status(200).send('pong');    
 });
 
+app.get("/redirect/:id", (req, res) => {
+    var data = 'https://app.adjust.com/8o76e42?engagement_type=fallback_click%26fallback=https%3A%2F%2Fwww.alliancebank.com.my%2Fpromotions%2Fthebankinyourpocket.aspx%26fallback_lp=https%3A%2F%2Fwww.alliancebank.com.my%2Fpromotions%2Fthebankinyourpocket.aspx%26campaign=biyp%26adgroup=fb%26creative=null%26ecid=abcd';
+    data = decodeURIComponent(data);
+    res.redirect(data);
+});
+
 app.get("/home", (req, res) => {
     res.render('pages/home');
 });
@@ -57,8 +61,9 @@ app.get("/qr", qr.GenerateQR);
 app.post("/qr", qr.GenerateQR);
 
 
+
 // set port, listen for requests
-const PORT = process.env.PORT || 9999;
+const PORT = context.ExpressPort || 9999;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
