@@ -3,12 +3,23 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Gaia - Bootstrap Template | Free Demo</title>
+    <title>AQRCode | Free QR Code Generation Rest API Service</title>
+    <meta name="description" content="Free QR Code Generator with logo, background image for URL. Get your free QR Codes Rest API Service now!">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="subtitle" content="Create your QR Code for free">
+
+    <meta property="og:title" content="AQRCode | Free QR Code Generation Rest API Service"/>
+    <meta property="og:description" content="Free QR Code Generator with logo, background image for URL. Get your free QR Codes Rest API Service now!">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://qrcode.chooyee.co/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="article:modified_time" content="2021-04-25" />
+
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/gaia.css" rel="stylesheet"/>
 
@@ -16,6 +27,16 @@
     <link href='https://fonts.googleapis.com/css?family=Cambo|Poppins:400,600' rel='stylesheet' type='text/css'>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTLTBX7250"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-RTLTBX7250');
+    </script>
 </head>
 
 <body>
@@ -30,33 +51,30 @@
                     <span class="icon-bar bar2"></span>
                     <span class="icon-bar bar3"></span>
                 </button>
-                <a href="http://www.creative-tim.com" class="navbar-brand">
-                    Gaia - Free Demo<img src="http://localhost:8080/qr?data=https://www.google.com">
+                <a href="/" class="navbar-brand">
+                    AQRCode | Free QR Code Generation Rest API Service
                 </a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right navbar-uppercase">
                     <li>
-                        <a href="http://www.creative-tim.com/product/gaia-bootstrap-template-pro" target="_blank">Get PRO Version</a>
+                        <a href="#comingsoon" target="_blank">Get PRO Version</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#gaia" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#aqrcode" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-share-alt"></i> Share
                         </a>
                         <ul class="dropdown-menu dropdown-danger">
                             <li>
-                                <a href="#"><i class="fa fa-facebook-square"></i> Facebook</a>
+                                <a href="https://www.facebook.com/dialog/share?app_id=1057310958012035&display=popup&href=https%3A%2F%2Fqrcode.chooyee.co" target="_blank"><i class="fa fa-facebook-square"></i> Facebook</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i> Instagram</a>
+                                <a href="https://twitter.com/intent/tweet?text=Get%20your%20free%20QR%20Code%20@%20https://qrcode.chooyee.co" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="http://www.creative-tim.com/product/gaia-bootstrap-template" class="btn btn-danger btn-fill">Free Download</a>
+                        <a href="mailto:chooyee@gmail.com" class="btn btn-danger btn-fill">Contact us</a>
                     </li>
                 </ul>
             </div>
@@ -73,16 +91,15 @@
             <div class="container">
                 <div class="content">
                     <div class="title-area">
-                        <p>Free Demo</p>
-                        <h1 class="title-modern">Gaia</h1>
-                        <h3>Probably the most stylish bootstrap template in the world!</h2>
+                        <p>Free QR Code Generation Rest API Service</p>
+                        <h1 class="title-modern">AQRCode</h1>
+                        <h3>Probably the easiest QR code generator in the world!</h3>                       
                         <div class="separator line-separator">♦</div>
                     </div>
 
-                    <div class="button-get-started">
-                        <a href="http://www.creative-tim.com/product/gaia-bootstrap-template" target="_blank" class="btn btn-white btn-fill btn-lg ">
-                            Download Demo
-                        </a>
+                    <div class="title-area">
+                        <p class="description"><code style="text-transform:lowercase"><%=hostname%>/qr?data={your_url}</code></p>
+                        <img src="<%=hostname%>/qr?data=<%=hostname%>&width=100&height=100&foregroundcolor=11899c&backgroundimage=<%=hostname%>/assets/img/logo.png" alt="qrcode">
                     </div>
                 </div>
 
@@ -95,168 +112,56 @@
         <div class="container">
             <div class="row">
                 <div class="title-area">
-                    <h2>Our Services</h2>
+                    <h2>Documentation</h2>
                     <div class="separator separator-danger">✻</div>
-                    <p class="description">We promise you a new look and more importantly, a new attitude. We build that by getting to know you, your needs and creating the best looking clothes.</p>
+                    <p class="description"><code><%=hostname%>/qr?data={url}&width={numeric}&height=numeric&logo={url_of_logo}&backgroundimage={url_of_backgroundimage}&foregroundcolor={color_code}&backgroundcolor={color_code}</code></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="info-icon">
-                        <div class="icon text-danger">
-                            <i class="pe-7s-graph1"></i>
-                        </div>
-                        <h3>Sales</h3>
-                        <p class="description">We make our design perfect for you. Our adjustment turn our clothes into your clothes.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                <div class="title-area">
                     <div class="info-icon">
                         <div class="icon text-danger">
                             <i class="pe-7s-note2"></i>
                         </div>
-                        <h3>Content</h3>
-                        <p class="description">We create a persona regarding the multiple wardrobe accessories that we provide..</p>
+                        <h3>Example</h3>
+                        <p class="description">
+                            <code><%=hostname%>/qr?data=<%=hostname%>&width=256&height=256&logo=<%=hostname%>/assets/img/logo.png&foregroundcolor=a83cfa&backgroundcolor=f3f5e1</code>    
+                            <p><img src="<%=hostname%>/qr?data=<%=hostname%>&width=256&height=256&logo=<%=hostname%>/assets/img/logo.png&foregroundcolor=a83cfa&backgroundcolor=f3f5e1" alt="qrcode"></p>
+                        </p>
+                    </div>
+                </div>
+            </div>     
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-icon">
+                        <div class="icon text-danger">
+                            <i class="pe-7s-magic-wand"></i>
+                        </div>
+                        <h3>High Performance</h3>
+                        <p class="description">Every qr code is cache and supported up to 1000 tps!</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="info-icon">
                         <div class="icon text-danger">
-                            <i class="pe-7s-music"></i>
+                            <i class="pe-7s-link"></i>
                         </div>
-                        <h3>Music</h3>
-                        <p class="description">We like to present the world with our work, so we make sure we spread the word regarding our clothes.</p>
+                        <h3>Url Shorterner</h3>
+                        <p class="description">Long url? Fret not, your url will be shortern via TinyUrl.com</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="section section-our-team-freebie">
-        <div class="parallax filter filter-color-black">
-            <div class="image" style="background-image:url('assets/img/header-2.jpeg')">
-            </div>
-            <div class="container">
-                <div class="content">
-                    <div class="row">
-                        <div class="title-area">
-                            <h2>Who We Are</h2>
-                            <div class="separator separator-danger">✻</div>
-                            <p class="description">We promise you a new look and more importantly, a new attitude. We build that by getting to know you, your needs and creating the best looking clothes.</p>
+                <div class="col-md-4">
+                    <div class="info-icon">
+                        <div class="icon text-danger">
+                            <i class="pe-7s-cloud-download"></i>
                         </div>
-                    </div>
-
-                    <div class="team">
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card card-member">
-                                            <div class="content">
-                                                <div class="avatar avatar-danger">
-                                                    <img alt="..." class="img-circle" src="assets/img/faces/face_1.jpg"/>
-                                                </div>
-                                                <div class="description">
-                                                    <h3 class="title">Tina</h3>
-                                                    <p class="small-text">CEO / Co-Founder</p>
-                                                    <p class="description">I miss the old Kanye I gotta say at that time I’d like to meet Kanye And I promise the power is in the people and I will use the power given by the people to bring everything I have back to the people.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-member">
-                                            <div class="content">
-                                                <div class="avatar avatar-danger">
-                                                    <img alt="..." class="img-circle" src="assets/img/faces/face_4.jpg"/>
-                                                </div>
-                                                <div class="description">
-                                                    <h3 class="title">Andrew</h3>
-                                                    <p class="small-text">Product Designer</p>
-                                                    <p class="description">I miss the old Kanye I gotta say at that time I’d like to meet Kanye And I promise the power is in the people and I will use the power given by the people to bring everything I have back to the people.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-member">
-                                            <div class="content">
-                                                <div class="avatar avatar-danger">
-                                                    <img alt="..." class="img-circle" src="assets/img/faces/face_3.jpg"/>
-                                                </div>
-                                                <div class="description">
-                                                    <h3 class="title">Michelle</h3>
-                                                    <p class="small-text">Marketing Hacker</p>
-                                                    <p class="description">I miss the old Kanye I gotta say at that time I’d like to meet Kanye And I promise the power is in the people and I will use the power given by the people to bring everything I have back to the people.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                        <h3>Customize</h3>
+                        <p class="description">Need to create in batch or customize request? Please contact us.</p>
                     </div>
                 </div>
-            </div>
+            </div>      
         </div>
     </div>
-
-
-    <div class="section section-our-clients-freebie">
-        <div class="container">
-            <div class="title-area">
-                <h5 class="subtitle text-gray">Here are some</h5>
-                <h2>Clients Testimonials</h2>
-                <div class="separator separator-danger">∎</div>
-            </div>
-
-            <ul class="nav nav-text" role="tablist">
-                <li class="active">
-                    <a href="#testimonial1" role="tab" data-toggle="tab">
-                        <div class="image-clients">
-                            <img alt="..." class="img-circle" src="assets/img/faces/face_5.jpg"/>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#testimonial2" role="tab" data-toggle="tab">
-                        <div class="image-clients">
-                            <img alt="..." class="img-circle" src="assets/img/faces/face_6.jpg"/>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#testimonial3" role="tab" data-toggle="tab">
-                        <div class="image-clients">
-                            <img alt="..." class="img-circle" src="assets/img/faces/face_2.jpg"/>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="testimonial1">
-                    <p class="description">
-                        And I used a period because contrary to popular belief I strongly dislike exclamation points! We no longer have to be scared of the truth feels good to be home In Roman times the artist would contemplate proportions and colors. Now there is only one important color... Green I even had the pink polo I thought I was Kanye I promise I will never let the people down. I want a better life for all!
-                    </p>
-                </div>
-                <div class="tab-pane" id="testimonial2">
-                    <p class="description">Green I even had the pink polo I thought I was Kanye I promise I will never let the people down. I want a better life for all! And I used a period because contrary to popular belief I strongly dislike exclamation points! We no longer have to be scared of the truth feels good to be home In Roman times the artist would contemplate proportions and colors. Now there is only one important color...
-                    </p>
-                </div>
-                <div class="tab-pane" id="testimonial3">
-                    <p class="description"> I used a period because contrary to popular belief I strongly dislike exclamation points! We no longer have to be scared of the truth feels good to be home In Roman times the artist would contemplate proportions and colors. The 'Gaia' team did a great work while we were collaborating. They provided a vision that was in deep connection with our needs and helped us achieve our goals.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
 
     <div class="section section-small section-get-started">
         <div class="parallax filter">
@@ -265,13 +170,13 @@
             </div>
             <div class="container">
                 <div class="title-area">
-                    <h2 class="text-white">Do you want to work with us?</h2>
+                    <h2 class="text-white">Do you want to connect with us?</h2>
                     <div class="separator line-separator">♦</div>
-                    <p class="description"> We are keen on creating a second skin for anyone with a sense of style! We design our clothes having our customers in mind and we never disappoint!</p>
+                    <p class="description"> </p>
                 </div>
 
                 <div class="button-get-started">
-                    <a href="#gaia" class="btn btn-danger btn-fill btn-lg">Contact Us</a>
+                    <a href="mailto:chooyee@gmail.com" class="btn btn-danger btn-fill btn-lg">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -288,18 +193,7 @@
                             <ul>
                                 <li>
                                     <a href="#">Home</a></li>
-                                <li>
-                                    <a href="#">Find offers</a>
-                                </li>
-                                <li>
-                                    <a href="#">Discover Projects</a>
-                                </li>
-                                <li>
-                                    <a href="#">Our Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="#">About Us</a>
-                                </li>
+                               
                             </ul>
                         </nav>
                     </div>
@@ -318,12 +212,7 @@
                                 <li>
                                     <a href="#">Terms &amp; Conditions</a>
                                 </li>
-                                <li>
-                                    <a href="#">Company Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#">Money Back</a>
-                                </li>
+                                
                             </ul>
                         </nav>
                     </div>
@@ -339,11 +228,7 @@
                                         <hr class="hr-small">
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-twitter"></i> We've just been featured on <b> Awwwards Website</b>! Thank you everybody for...
-                                    </a>
-                                </li>
+                              
                             </ul>
                         </nav>
                     </div>
@@ -368,11 +253,7 @@
                                         <i class="fa fa-twitter"></i> Twitter
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="btn btn-social btn-reddit btn-simple">
-                                        <i class="fa fa-google-plus-square"></i> Google+
-                                    </a>
-                                </li>
+                              
                             </ul>
                         </nav>
                     </div>
@@ -380,7 +261,7 @@
             </div>
             <hr>
             <div class="copyright">
-                 © <script> document.write(new Date().getFullYear()) </script> Creative Tim, made with love
+                 © <script> document.write(new Date().getFullYear()) </script> aqrcode is offered by chooyee.co, made with love
             </div>
         </div>
     </footer>
@@ -399,5 +280,6 @@
 
 <!--   file where we handle all the script from the Gaia - Bootstrap Template   -->
 <script type="text/javascript" src="assets/js/gaia.js"></script>
+
 
 </html>

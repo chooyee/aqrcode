@@ -73,21 +73,21 @@ async function GenerateQRAsync(req, qrId){
     if (jsonObj.hasOwnProperty('height')){
         options.height = parseInt(jsonObj.height);
     }
-    if (jsonObj.hasOwnProperty('backgroundImage')){
-        options.backgroundImage = jsonObj.backgroundImage;
+    if (jsonObj.hasOwnProperty('backgroundimage')){
+        options.backgroundImage = jsonObj.backgroundimage;
         options.autoColor=true;
     }
-    if (jsonObj.hasOwnProperty('colorDark')){
-        console.log(jsonObj.colorDark);
-        if (!jsonObj.colorDark.startsWith('#'))
-            jsonObj.colorDark ='#' + jsonObj.colorDark;
+    if (jsonObj.hasOwnProperty('foregroundcolor')){
+        console.log(jsonObj.foregroundcolor);
+        if (!jsonObj.foregroundcolor.startsWith('#'))
+            jsonObj.foregroundcolor ='#' + jsonObj.foregroundcolor;
         
-        options.colorDark = jsonObj.colorDark;
+        options.colorDark = jsonObj.foregroundcolor;
     }
-    if (jsonObj.hasOwnProperty('colorLight')){
-        if (!jsonObj.colorLight.startsWith('#'))
-            jsonObj.colorLight ='#' + jsonObj.colorLight;        
-        options.colorLight = jsonObj.colorLight;
+    if (jsonObj.hasOwnProperty('backgroundcolor')){
+        if (!jsonObj.backgroundcolor.startsWith('#'))
+            jsonObj.backgroundcolor ='#' + jsonObj.backgroundcolor;        
+        options.colorLight = jsonObj.backgroundcolor;
     }
 
     //options.text ="https://app.adjust.com/8o76e42?engagement_type=fallback_click&fallback=https://www.alliancebank.com.my/promotions/thebankinyourpocket.aspx&fallback_lp=https://www.alliancebank.com.my/promotions/thebankinyourpocket.aspx&campaign=biyp&adgroup=fb&creative=null&ecid=abcd";

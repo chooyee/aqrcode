@@ -53,8 +53,11 @@ app.get("/redirect/:id", (req, res) => {
     res.redirect(data);
 });
 
-app.get("/home", (req, res) => {
-    res.render('pages/home');
+app.get("/", (req, res) => {
+    var hostname = req.protocol + '://' + req.hostname;
+    if (context.Environment ==='development')
+        hostname = req.protocol + '://' + req.header('host');
+    res.render('pages/home',{hostname:req.protocol + '://' + req.header('host')});
 });
 app.get("/qr", qr.GenerateQR);
 

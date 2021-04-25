@@ -9,6 +9,7 @@ class Context {
         this.AWS.S3BUCKET = process.env.S3Bucket;
         this.TinyToken = process.env.tiny_token;
         this.ExpressPort = process.env.PORT;
+        this.Environment = process.env.environment;
     }
 
 
