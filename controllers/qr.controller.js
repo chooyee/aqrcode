@@ -13,6 +13,7 @@ exports.GenerateQR = async(req, res)=>{
     console.log('GenerateQR');
     
     let optionStr = JSON.stringify(req.query); 
+    console.log(optionStr);
     let qrId = crypto.createHash('md5').update(optionStr).digest("hex");
 
     cache.get(qrId, async function(){return GenerateQRAsync(req,qrId)}).then((result)=>{    
