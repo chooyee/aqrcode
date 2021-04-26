@@ -16,7 +16,7 @@ exports.GenerateQR = async(req, res)=>{
     console.log(optionStr);
     let qrId = crypto.createHash('md5').update(optionStr).digest("hex");
 
-    cache.get(qrId, async function(){return GenerateQRAsync(req,qrId)}).then((result)=>{    
+    cache.get(qrId, async()=>{return GenerateQRAsync(req,qrId)}).then((result)=>{    
         const im = result.split(",")[1];
         const img = Buffer.from(im, 'base64');
         res.writeHead(200, {
@@ -57,13 +57,15 @@ async function GenerateQRAsync(req, qrId){
     }   
 
     //TinyUrl
-    const shortUrlRes = await ShortUrl.Create(longUrl);
-    if (shortUrlRes.status==Enum.Status.Success){       
-        options.text = shortUrlRes.url;
-    }
-    else{        
-        options.text = longUrl;
-    }
+    // const shortUrlRes = await ShortUrl.Create(longUrl);
+    // if (shortUrlRes.status==Enum.Status.Success){       
+    //     options.text = shortUrlRes.url;
+    // }
+    // else{        
+    //     options.text = longUrl;
+    // }
+
+    options.text = longUrl;
 
     if (jsonObj.hasOwnProperty('logo')){
         options.logo = jsonObj.logo;
