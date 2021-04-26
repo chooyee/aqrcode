@@ -15,8 +15,19 @@ exports.GenerateQR = async(req, res)=>{
     let optionStr = JSON.stringify(req.query); 
     console.log(optionStr);
     let qrId = crypto.createHash('md5').update(optionStr).digest("hex");
+    const jsonObj = req.query;
+    // if (req.query.data!==undefined){
+    //     //options.text = req.query.data;
+    //     longUrl = req.query.data
+    //     jsonObj = req.query;
+    // }
+    // else{
+    //     //options.text = req.body.data;
+    //     longUrl = req.body.data;
+    //     jsonObj = req.body;
+    // }   
 
-    cache.get(qrId, async()=>{return GenerateQRAsync(req,qrId)}).then((result)=>{    
+    cache.get(qrId, async()=>{return GenerateQRAsync(jsonObj, qrId)}).then((result)=>{    
         const im = result.split(",")[1];
         const img = Buffer.from(im, 'base64');
         res.writeHead(200, {
@@ -33,7 +44,7 @@ exports.GenerateQR = async(req, res)=>{
     
 }
 
-async function GenerateQRAsync(req, qrId){
+async function GenerateQRAsync(jsonObj, qrId){
     console.log('GenerateQRAsync');
 
     let qr = await ClientModel.Client.Get(qrId);
@@ -44,28 +55,26 @@ async function GenerateQRAsync(req, qrId){
     var options = {
         text: data
     };
-    var longUrl = "";
-    if (req.query.data!==undefined){
-        //options.text = req.query.data;
-        longUrl = req.query.data
-        jsonObj = req.query;
+
+    var longUrl = jsonObj.data;
+   
+    //=====================================================================================================
+    //Start TinyUrl
+    //=====================================================================================================
+    if (jsonObj.hasOwnProperty('shorturl'))
+    {
+        const shortUrlRes = await ShortUrl.Create(longUrl);
+        if (shortUrlRes.status==Enum.Status.Success){       
+            options.text = shortUrlRes.url;
+        }
+        else{        
+            options.text = longUrl;
+        }
     }
-    else{
-        //options.text = req.body.data;
-        longUrl = req.body.data;
-        jsonObj = req.body;
-    }   
-
-    //TinyUrl
-    // const shortUrlRes = await ShortUrl.Create(longUrl);
-    // if (shortUrlRes.status==Enum.Status.Success){       
-    //     options.text = shortUrlRes.url;
-    // }
-    // else{        
-    //     options.text = longUrl;
-    // }
-
-    options.text = longUrl;
+    else{options.text = longUrl;}
+    //=====================================================================================================
+    //End TinyUrl
+    //=====================================================================================================
 
     if (jsonObj.hasOwnProperty('logo')){
         options.logo = jsonObj.logo;
