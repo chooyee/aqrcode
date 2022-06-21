@@ -27,21 +27,32 @@ exports.GenerateQR = async(req, res)=>{
     //     jsonObj = req.body;
     // }   
 
-    cache.get(qrId, async()=>{return GenerateQRAsync(jsonObj, qrId)}).then((result)=>{    
-        const im = result.split(",")[1];
-        const img = Buffer.from(im, 'base64');
-        res.writeHead(200, {
+    // cache.get(qrId, async()=>{return GenerateQRAsync(jsonObj, qrId)}).then((result)=>{    
+    //     const im = result.split(",")[1];
+    //     const img = Buffer.from(im, 'base64');
+    //     res.writeHead(200, {
+    //     'Content-Type': 'image/png',
+    //     'Content-Length': img.length
+    //     });
+    //     res.end(img);     
+    //     res.flush();
+       
+    // }).catch((e)=>{
+    //     console.log(e);
+    //     res.status(500).json({Error:e.message});   
+    // });
+    var result = await GenerateQRAsync(jsonObj, qrId);
+    console.log(result);
+    const im = result.split(",")[1];
+    const img = Buffer.from(im, 'base64');
+    res.writeHead(200, {
         'Content-Type': 'image/png',
         'Content-Length': img.length
-        });
-        res.end(img);     
-        res.flush();
-       
-    }).catch((e)=>{
-        console.log(e);
-        res.status(500).json({Error:e.message});   
     });
-    
+    res.end(img);     
+    res.flush();
+   
+       
 }
 
 async function GenerateQRAsync(jsonObj, qrId){
@@ -129,3 +140,6 @@ exports.GenerateQRRaw = async (data)=>{
     return qrcode.toDataURL();
 }
 
+exports.CreateIndex= async()=>{
+    _ = await ClientModel.Client.CreateIndex();
+}

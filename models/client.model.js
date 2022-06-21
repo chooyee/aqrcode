@@ -47,6 +47,11 @@ class ClientModel{
         }
     }
 
+    CreateIndex = async()=>{
+        var query = 'CREATE INDEX IF NOT EXISTS "md5" ON "clients" ("md5")';
+        await ndb.sequelize.query(query);
+        return "ok";
+    }
 }
 
 exports.Client = new ClientModel();

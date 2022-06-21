@@ -6,7 +6,7 @@ const app = express();
 const qr = require("./controllers/qr.controller");
 const context = require('./service/context.service');
 const db = require("./models");
-db.sequelize.sync();
+db.sequelize.sync('alter');
 app.use(compression())
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -63,10 +63,10 @@ app.get("/qr", qr.GenerateQR);
 
 app.post("/qr", qr.GenerateQR);
 
-
+app.get("/createindex", qr.CreateIndex);
 
 // set port, listen for requests
-const PORT = context.ExpressPort || 9999;
+const PORT = context.ExpressPort || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
