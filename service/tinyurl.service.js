@@ -10,8 +10,7 @@ class Shorturi {
         this.endpoints = this.basePath + "/create"
         this.accessToken = context.TinyToken;
         this.createTinyObj ={
-            "url": "",
-            "domain": "tiny.one"
+            "url": ""
           }
     }
 

@@ -57,6 +57,7 @@ exports.GenerateQR = async(req, res)=>{
 
 async function GenerateQRAsync(jsonObj, qrId){
     console.log('GenerateQRAsync');
+    let autoShortUrl = false
 
     let qr = await ClientModel.Client.Get(qrId);
     if (qr!==null)
@@ -67,12 +68,42 @@ async function GenerateQRAsync(jsonObj, qrId){
         text: data
     };
 
-    var longUrl = jsonObj.data;
+    var longUrl = jsonObj.data
+    console.log(longUrl)
    
+    if (jsonObj.hasOwnProperty('deep_link'))
+    {
+        longUrl = longUrl+"&deep_link=" + jsonObj.deep_link
+        autoShortUrl = true
+    }
+    if (jsonObj.hasOwnProperty('campaign'))
+    {
+        longUrl = longUrl+"&campaign=" + jsonObj.campaign
+    }
+    if (jsonObj.hasOwnProperty('adgroup'))
+    {
+        longUrl = longUrl+"&adgroup=" + jsonObj.adgroup
+    }
+    if (jsonObj.hasOwnProperty('creative'))
+    {
+        longUrl = longUrl+"&creative=" + jsonObj.creative
+    }
+    if (jsonObj.hasOwnProperty('ecid'))
+    {
+        longUrl = longUrl+"&ecid=" + jsonObj.ecid
+    }
+    if (jsonObj.hasOwnProperty('gclid'))
+    {
+        longUrl = longUrl+"&gclid=" + jsonObj.gclid
+    }
+
+    logger.log.error('longUrl :' + longUrl)
+
+    
     //=====================================================================================================
     //Start TinyUrl
     //=====================================================================================================
-    if (jsonObj.hasOwnProperty('shorturl'))
+    if (jsonObj.hasOwnProperty('shorturl') || autoShortUrl)
     {
         const shortUrlRes = await ShortUrl.Create(longUrl);
         if (shortUrlRes.status==Enum.Status.Success){       
